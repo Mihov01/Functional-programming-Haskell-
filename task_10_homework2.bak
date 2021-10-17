@@ -1,0 +1,38 @@
+#lang racket
+(define (square x )
+        (* x x))
+(define (lenght x )
+  ( define (helper temp itter)
+     (if (zero? temp)
+         itter
+         (helper (quotient temp 10) (+ itter 1))))
+  (helper x 0))
+
+(define( divisor x ) ( define (divisorH x n )( if (= (remainder x n) 0) n (divisorH x (- n 1 )))  )
+  (divisorH x (- x 1)))
+(define (prime x ) (if
+                    (= x 1 )
+                    #f
+                    (= (divisor x ) 1)))
+( define (automorphic? x)
+   (define (helper1 num1 num2 len_num1)
+     ( cond
+        [(not (natural? x)) (error "not natural"]
+         [(zero? len_num1) #t]
+        [(not(= (remainder num1 10) (remainder num2 10))) #f]
+        [ else (helper1 (quotient num1 10) (quotient num2 10) (- len_num1 1))]))
+   (helper1 x (square x) (lenght x)))
+(define (natural? x)
+  (if ( <= x 0 ) #f #t))
+
+(equal? (automorphic? 3)#f)
+(equal? (automorphic? 10)#f)
+(equal? (automorphic? 5)#t)
+(equal? (automorphic? 25)#t)
+(equal? (automorphic? 76)#t) 
+(equal? (automorphic? 890625)#t) 
+(equal? (automorphic? 625)#t) 
+(equal? (automorphic? 36) #f)
+(equal? (automorphic? 11) #f)
+ (automorphic? -1) ; error: n was not natural
+ (automorphic? 0) ; error: n was not natural
