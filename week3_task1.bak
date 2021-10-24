@@ -1,0 +1,18 @@
+#lang racket
+(define (remove-first-occurrence num digit )
+        (define (remove-first-occurrence-helper  curr-num place )
+        (cond
+          [( zero? curr-num) (error "No such digit found")]
+          [(and ( zero? (quotient curr-num 10)) (=(remainder curr-num 10) digit )) (remainder num (expt 10 (- place 1 )))]
+          [(and(=(remainder curr-num 10) digit ) (= place 1 )) (quotient num 10)]
+          [(=(remainder curr-num 10) digit ) (+(*(quotient curr-num 10) (expt 10 (- place 1))) (*(remainder num (expt 10 (- place 1)))))]
+          [else (remove-first-occurrence-helper  (quotient curr-num 10) (+ place 1 ))]))
+          (remove-first-occurrence-helper  num 1 ))
+(= (remove-first-occurrence 15365 5) 1536)
+(= (remove-first-occurrence 15360 0) 1536)
+(= (remove-first-occurrence 15300 0) 1530)
+(= (remove-first-occurrence 15365 1) 5365)
+(= (remove-first-occurrence 35365 3) 3565)
+(= (remove-first-occurrence 1212 1) 122)
+(= (remove-first-occurrence 1212 2) 121)
+(= (remove-first-occurrence (remove-first-occurrence 1212 1) 1) 22)
