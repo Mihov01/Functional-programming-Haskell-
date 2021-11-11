@@ -1,0 +1,24 @@
+#lang racket
+(define (itinerary lst )
+(define (find-match lst1 obj);retuens the pair where the object is the first of the two , if there is no such pair returns null list
+        (cond
+          [(null? lst1 ) '()]
+          [ (equal? (car (car lst1 )) obj ) (list* (car lst1))]
+          [ else (find-match ( cdr lst1 ) obj)]))
+
+(define (find-sequence lst2 obj)
+        (define ( helper curr-list curr-obj new-list)
+        (cond
+            [(or (null? curr-list) (null? (find-match curr-list curr-obj))) new-list]
+            [ else (helper
+                    ( remove (find-match curr-list curr-obj) curr-list)
+                    ( cdr (find-match curr-list curr-obj))
+                    ( append new-list (list (cdr (find-match curr-list curr-obj)))))]))
+        (helper lst2 obj (list obj)))
+  
+   (λ (x) ( cond
+             [ ( <= ( length (find-sequence lst x)) (length lst)) (error "No such itinerary!")]
+             [else (find-sequence lst x)])))
+  
+
+

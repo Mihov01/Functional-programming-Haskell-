@@ -42,7 +42,6 @@
                        define (add-ones-helper leftover result lenght-num) ; helper that has 3 arguments , a temporary number leftofer , the last digit of witch we use on every itteration
                         ; result , which stores the result and lenght-num which stores the lenght of the result on every itteration
                         ( cond
-                           [(zero? n) 1]
                            [(< n 0) (error "n should be positive")]; if the user inputs invalid argument 
                            [(zero? leftover ) result]
                            [else (add-ones-helper (quotient leftover 10) ; remove the last digit of the leftover
