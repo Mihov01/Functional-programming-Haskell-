@@ -18,7 +18,7 @@
                       (helper lst2 obj (list obj)))
   
    (λ (x) ( if ( <= ( length (find-sequence lst x)) (length lst))
-                    (display "No such itinerary!")
+                    (error "No such itinerary!")
                     (find-sequence lst x))))
 ( define ( pad xs)
 (define l-sub-lst (if (empty? xs) (error "Empty matrix") (length (first xs)))) ; returns the lensizeght of one row
